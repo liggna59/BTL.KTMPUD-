@@ -37,7 +37,7 @@ func main() {
 	}
 	port := flag.Int("port", defaultPort, "Cổng HTTP (mặc định 8080, có thể đặt qua biến môi trường PORT)")
 	host := flag.String("host", "0.0.0.0", "Địa chỉ lắng nghe (0.0.0.0 = cho phép máy khác trong mạng LAN truy cập)")
-	dataDir := flag.String("data", "data", "Thư mục chứa file dữ liệu JSON")
+	dataDir := flag.String("data", "", "Thư mục chứa file dữ liệu JSON (mặc định tự tìm data/: thư mục hiện tại -> cạnh file exe -> thư mục cha của file exe)")
 	webDir := flag.String("web", "", "Phục vụ giao diện từ thư mục này thay vì bản nhúng trong file exe (dùng khi phát triển)")
 	noBrowser := flag.Bool("no-browser", false, "Không tự động mở trình duyệt khi khởi động")
 	flag.Parse()
@@ -47,7 +47,7 @@ func main() {
 	fmt.Println("  HỆ THỐNG QUẢN LÝ BÁN HÀNG & HÓA ĐƠN CỬA HÀNG VẬT TƯ  v" + Version)
 	fmt.Println("==============================================================")
 
-	absData, _ := filepath.Abs(*dataDir)
+	absData := resolveDataDir(*dataDir)
 	app, err := handlers.NewApp(absData)
 	if err != nil {
 		fatal("Không mở được dữ liệu trong %s: %v\n  -> Hãy sửa file JSON bị lỗi hoặc khôi phục từ thư mục %s",
@@ -134,6 +134,31 @@ func fatal(format string, args ...any) {
 		_, _ = os.Stdin.Read(b[:])
 	}
 	os.Exit(1)
+}
+
+// resolveDataDir xác định thư mục dữ liệu. Nếu không truyền -data, tìm thư mục data/ có sẵn theo thứ tự:
+// thư mục hiện tại -> cạnh file exe -> thư mục cha của file exe (trường hợp bấm đúp bin\BTKTPMUD.exe
+// trong thư mục mã nguồn). Không tìm thấy thì tạo data/ trong thư mục hiện tại.
+func resolveDataDir(flagValue string) string {
+	if flagValue != "" {
+		abs, _ := filepath.Abs(flagValue)
+		return abs
+	}
+	cwdData, _ := filepath.Abs("data")
+	candidates := []string{cwdData}
+	if exe, err := os.Executable(); err == nil {
+		if real, err := filepath.EvalSymlinks(exe); err == nil {
+			exe = real
+		}
+		exeDir := filepath.Dir(exe)
+		candidates = append(candidates, filepath.Join(exeDir, "data"), filepath.Join(filepath.Dir(exeDir), "data"))
+	}
+	for _, dir := range candidates {
+		if info, err := os.Stat(dir); err == nil && info.IsDir() {
+			return dir
+		}
+	}
+	return cwdData
 }
 
 // isServerRunning kiểm tra phần mềm này đã chạy sẵn trên cổng chưa.

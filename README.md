@@ -73,7 +73,7 @@ go run ./cmd/server -web web
 |---|---|---|
 | `-port` | `8080` (hoặc biến môi trường `PORT`) | Cổng HTTP |
 | `-host` | `0.0.0.0` | Địa chỉ lắng nghe; `127.0.0.1` để chỉ cho phép máy này truy cập |
-| `-data` | `data` | Thư mục chứa file dữ liệu JSON |
+| `-data` | tự tìm `data/` | Thư mục chứa file dữ liệu JSON. Mặc định tìm `data/` ở thư mục hiện tại, cạnh file exe, rồi thư mục cha của file exe; không có thì tạo mới |
 | `-web` | *(trống)* | Phục vụ giao diện từ thư mục này thay cho bản nhúng trong exe |
 | `-no-browser` | `false` | Không tự mở trình duyệt |
 
