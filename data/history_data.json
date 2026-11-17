@@ -125,10 +125,20 @@
         "unit_price": 7000,
         "total_price": 14000,
         "is_lump_sum": false
+      },
+      {
+        "line_number": 3,
+        "product_name": "Băng tan quấn ren",
+        "unit": "cuộn",
+        "quantity": null,
+        "unit_price": 6000,
+        "total_price": 6000,
+        "is_lump_sum": true
       }
     ],
-    "total_amount": 209000,
-    "amount_in_words": "Hai trăm lẻ chín nghìn đồng chẵn",
-    "created_at": "2026-11-17T08:30:41+07:00"
+    "total_amount": 215000,
+    "amount_in_words": "Hai trăm mười lăm nghìn đồng chẵn",
+    "created_at": "2026-11-17T08:30:41+07:00",
+    "updated_at": "2026-11-17T14:29:28+07:00"
   }
 ]
