@@ -3,6 +3,7 @@ __pycache__/
 app_data/
 hoa_don_xuat/
 build/
-dist/
+dist/*
+!dist/QuanLyBanHang-Windows.zip
 *.spec
 

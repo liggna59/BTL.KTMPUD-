@@ -43,6 +43,8 @@ Các bài kiểm thử dùng thư mục tạm riêng.
 
 ## Chạy bản EXE
 
+Tải [gói Windows](dist/QuanLyBanHang-Windows.zip) từ repository bằng nút tải tệp.
+
 Giải nén gói `QuanLyBanHang-Windows.zip` vào thư mục có quyền ghi, rồi mở
 `QuanLyBanHang.exe`. Máy sử dụng bản EXE có thể chạy ngay mà không cần cài Python.
 Dữ liệu được tạo trong `app_data/` cạnh EXE, hóa đơn xuất nằm trong `hoa_don_xuat/`.

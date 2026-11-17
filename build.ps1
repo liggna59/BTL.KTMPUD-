@@ -6,7 +6,7 @@ if (-not (Test-Path -LiteralPath $python)) {
 }
 & $python -m unittest discover -v
 if ($LASTEXITCODE -ne 0) { throw 'Tests failed.' }
-& $python -m PyInstaller --noconfirm --clean --onefile --windowed --name QuanLyBanHang main.py
+& $python -m PyInstaller --noconfirm --clean --onefile --windowed --specpath build --name QuanLyBanHang main.py
 if ($LASTEXITCODE -ne 0) { throw 'Executable build failed.' }
 Copy-Item -LiteralPath 'sample_products.xlsx', 'README.md' -Destination 'dist' -Force
 Compress-Archive -LiteralPath 'dist/QuanLyBanHang.exe', 'dist/sample_products.xlsx', 'dist/README.md' -DestinationPath 'dist/QuanLyBanHang-Windows.zip' -Force
