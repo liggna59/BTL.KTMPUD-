@@ -4,7 +4,8 @@
   "description": "Kiểm thử E2E 15 tiêu chí nghiệm thu (TC01–TC15) trên trình duyệt thật",
   "type": "module",
   "scripts": {
-    "test": "node e2e.mjs"
+    "test": "node e2e.mjs",
+    "guide": "node guide.mjs"
   },
   "devDependencies": {
     "playwright-core": "1.49.1"

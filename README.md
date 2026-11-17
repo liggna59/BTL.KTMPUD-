@@ -53,10 +53,12 @@ Yêu cầu: [Go](https://go.dev/dl/) 1.22 trở lên. Không cần thư viện n
 :: Windows
 build.bat          :: chạy kiểm thử rồi build bin\BTKTPMUD.exe
 build.bat run      :: build xong chạy luôn
-build.bat zip      :: build xong đóng gói dist\BTKTPMUD-windows.zip (exe + data + hướng dẫn) để gửi người khác
+build.bat zip      :: build xong đóng gói dist\BTKTPMUD-v1.0.0-windows.zip để gửi người khác
 ```
 
-Người nhận file `.zip` chỉ cần giải nén và bấm đúp `BTKTPMUD.exe`; hướng dẫn cho người dùng cuối nằm trong [`docs/HUONG_DAN_SU_DUNG.txt`](docs/HUONG_DAN_SU_DUNG.txt) (được đóng kèm trong gói).
+Gói `.zip` chứa thư mục `QuanLyBanHangVatTu` gồm `BTKTPMUD.exe`, thư mục `data` (dữ liệu mẫu), sách hướng dẫn [`HUONG_DAN_SU_DUNG.pdf`](docs/HUONG_DAN_SU_DUNG.pdf) (22 trang, có ảnh chụp màn hình đánh số chú thích) và [`BAT_DAU_NHANH.txt`](docs/BAT_DAU_NHANH.txt). Người nhận chỉ cần giải nén và bấm đúp `BTKTPMUD.exe`.
+
+Sách hướng dẫn được tạo tự động từ [`docs/huong-dan/huong-dan.html`](docs/huong-dan/huong-dan.html). Sau khi sửa giao diện, chụp lại ảnh và xuất lại PDF bằng: `cd tests/e2e && npm install && npm run guide`.
 
 ```sh
 # Linux / macOS / Git Bash

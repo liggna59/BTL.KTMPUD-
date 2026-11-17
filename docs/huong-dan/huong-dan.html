@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Hướng dẫn sử dụng · Phần mềm Quản lý bán hàng vật tư</title>
+<style>
+  :root { --blue: #1d4ed8; --navy: #1e3a8a; --red: #e11d48; --green: #15803d; --amber: #b45309; --line: #cbd5e1; --muted: #64748b; --soft: #f1f5f9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; font-size: 10pt; line-height: 1.5; color: #1e293b; }
+  h1, h2, h3, h4 { line-height: 1.25; color: #0f172a; }
+  h2 { break-before: page; font-size: 17pt; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 3px solid var(--blue); color: var(--navy); }
+  h2 .no { display: inline-block; min-width: 34px; height: 34px; margin-right: 10px; border-radius: 8px; background: var(--blue); color: #fff; text-align: center; line-height: 34px; font-size: 15pt; }
+  h3 { font-size: 12pt; margin: 14px 0 5px; color: var(--navy); break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 10px 0 3px; break-after: avoid; }
+  p { margin: 0 0 8px; }
+  a { color: var(--blue); text-decoration: none; }
+  b, strong { color: #0f172a; }
+  ul, ol { margin: 4px 0 10px; padding-left: 22px; }
+  li { margin: 3px 0; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 9.5pt; background: var(--soft); border: 1px solid #e2e8f0; border-radius: 4px; padding: 0 4px; }
+  kbd { display: inline-block; font-family: "Segoe UI", Arial, sans-serif; font-size: 8.5pt; font-weight: 700; padding: 1px 6px; border: 1px solid #94a3b8; border-bottom-width: 2px; border-radius: 4px; background: #fff; color: #0f172a; white-space: nowrap; }
+  .btn { display: inline-block; padding: 0 7px; border-radius: 4px; font-weight: 700; font-size: 9.5pt; white-space: nowrap; }
+  .btn-green { background: #16a34a; color: #fff; }
+  .btn-blue { background: var(--blue); color: #fff; }
+  .btn-gray { background: #fff; border: 1px solid #94a3b8; color: #334155; }
+  .btn-red { color: #dc2626; border: 1px solid #fecaca; background: #fef2f2; }
+
+  /* Bìa */
+  .cover { height: 245mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .cover-top { padding-top: 30mm; }
+  .cover .kicker { font-size: 12pt; font-weight: 700; letter-spacing: 2px; color: var(--blue); text-transform: uppercase; }
+  .cover h1 { font-size: 30pt; margin: 10px 0 8px; color: var(--navy); }
+  .cover .sub { font-size: 14pt; color: #334155; max-width: 150mm; }
+  .cover img { width: 100%; border: 1px solid var(--line); border-radius: 8px; margin-top: 14mm; }
+  .cover-meta { display: flex; justify-content: space-between; font-size: 10pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 8px; }
+
+  /* Mục lục */
+  .toc { break-before: page; }
+  .toc h2 { break-before: avoid; }
+  .toc ol { list-style: none; padding: 0; counter-reset: toc; }
+  .toc > ol > li { counter-increment: toc; padding: 4px 0; border-bottom: 1px dotted var(--line); font-weight: 600; }
+  .toc > ol > li::before { content: counter(toc) ". "; color: var(--blue); font-weight: 800; }
+  .toc ol ol { padding-left: 22px; font-weight: 400; color: #334155; font-size: 9pt; margin: 2px 0 0; }
+  .toc ol ol li { padding: 0; margin: 0; }
+
+  figure { margin: 8px 0 10px; break-inside: avoid; }
+  figure img { display: block; max-width: 100%; margin: 0 auto; border: 1px solid var(--line); border-radius: 6px; }
+  figure.narrow img { max-width: 62%; }
+  figure.phone img { max-width: 30%; }
+  figure.small img { max-width: 46%; }
+  figcaption { text-align: center; font-size: 9pt; font-style: italic; color: var(--muted); margin-top: 5px; }
+
+  .legend { list-style: none; padding: 0; margin: 6px 0 12px; break-inside: avoid; }
+  .legend li { display: flex; gap: 10px; align-items: flex-start; margin: 3px 0; }
+  .legend .n { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 800; font-size: 9.5pt; text-align: center; line-height: 22px; }
+
+  .steps { list-style: none; padding: 0; counter-reset: step; margin: 8px 0 12px; }
+  .steps > li { counter-increment: step; position: relative; padding: 2px 0 3px 36px; break-inside: avoid; }
+  .steps > li::before { content: counter(step); position: absolute; left: 0; top: 1px; width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 800; text-align: center; line-height: 24px; font-size: 9.5pt; }
+
+  .callout { border-radius: 8px; padding: 7px 12px 7px 14px; margin: 8px 0 10px; border-left: 5px solid; break-inside: avoid; }
+  .callout > b:first-child { display: block; margin-bottom: 2px; }
+  .tip { background: #eff6ff; border-color: var(--blue); }
+  .note { background: #f0fdf4; border-color: #16a34a; }
+  .warn { background: #fffbeb; border-color: #f59e0b; }
+  .danger { background: #fef2f2; border-color: #dc2626; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 10pt; break-inside: auto; }
+  th, td { border: 1px solid var(--line); padding: 4px 8px; vertical-align: top; text-align: left; }
+  th { background: var(--soft); font-weight: 700; }
+  tr { break-inside: avoid; }
+
+  .console { background: #0c0c0c; color: #e5e5e5; font-family: Consolas, "Courier New", monospace; font-size: 8.8pt; line-height: 1.45; padding: 12px 14px; border-radius: 8px; white-space: pre; break-inside: avoid; }
+  .console .hl { color: #4ade80; }
+
+  .cheat { border: 2px solid var(--blue); border-radius: 10px; padding: 12px 16px; margin: 12px 0; break-inside: avoid; background: #f8fafc; }
+  .cheat h3 { margin-top: 0; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .muted { color: var(--muted); }
+  .small { font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<!-- ============================== BÌA ============================== -->
+<section class="cover">
+  <div class="cover-top">
+    <div class="kicker">Hướng dẫn sử dụng</div>
+    <h1>Phần mềm Quản lý Bán hàng<br>&amp; Hóa đơn Cửa hàng Vật tư</h1>
+    <div class="sub">Lập hóa đơn nhanh tại quầy, bán khoán trọn gói, in hóa đơn A4, quản lý thư viện hàng hóa và tra cứu lịch sử. Không cần cài đặt, không cần Internet.</div>
+    <img src="images/01-giao-dien-chinh.png" alt="">
+  </div>
+  <div class="cover-meta">
+    <span>Phiên bản phần mềm 1.0.0</span>
+    <span>Dành cho chủ cửa hàng và nhân viên thu ngân</span>
+    <span>Tháng 11/2026</span>
+  </div>
+</section>
+
+<!-- ============================== MỤC LỤC ============================== -->
+<section class="toc">
+  <h2>Mục lục</h2>
+  <ol>
+    <li><a href="#gioi-thieu">Giới thiệu &amp; yêu cầu máy tính</a>
+      <ol><li>Bộ phần mềm gồm những gì</li><li>Bán hàng nhanh trong 1 phút</li></ol></li>
+    <li><a href="#cai-dat">Cài đặt và mở phần mềm</a>
+      <ol><li>Giải nén và chạy lần đầu</li><li>Cảnh báo của Windows</li><li>Cửa sổ đen: máy chủ của phần mềm</li><li>Tạo lối tắt ngoài màn hình nền, tự chạy khi bật máy</li><li>Tắt phần mềm</li></ol></li>
+    <li><a href="#giao-dien">Làm quen giao diện</a></li>
+    <li><a href="#thong-tin-cua-hang">Nhập thông tin cửa hàng in trên hóa đơn</a></li>
+    <li><a href="#lap-hoa-don">Lập hóa đơn bán hàng</a>
+      <ol><li>Thông tin khách hàng</li><li>Thêm hàng bằng gợi ý</li><li>Hàng mới chưa có trong thư viện</li><li>Bán khoán trọn gói</li><li>Gõ giá nhanh</li><li>Sửa, xóa dòng và Hoàn tác</li><li>Lưu hóa đơn</li><li>Lập hóa đơn mới</li></ol></li>
+    <li><a href="#in-hoa-don">In hóa đơn khổ A4</a></li>
+    <li><a href="#thu-vien">Thư viện hàng hóa</a></li>
+    <li><a href="#lich-su">Lịch sử hóa đơn: tra cứu, in lại, sửa, xóa</a></li>
+    <li><a href="#thong-ke">Thống kê nhanh</a></li>
+    <li><a href="#nhieu-may">Dùng trên nhiều máy và điện thoại</a></li>
+    <li><a href="#ngoai-tuyen">Khi mất kết nối máy chủ</a></li>
+    <li><a href="#du-lieu">Dữ liệu: sao lưu, khôi phục, chuyển máy</a></li>
+    <li><a href="#phim-tat">Bảng phím tắt</a></li>
+    <li><a href="#su-co">Câu hỏi thường gặp và xử lý sự cố</a></li>
+  </ol>
+</section>
+
+<!-- ============================== 1 ============================== -->
+<h2 id="gioi-thieu"><span class="no">1</span>Giới thiệu &amp; yêu cầu máy tính</h2>
+<p>Phần mềm giúp cửa hàng vật tư xây dựng, điện nước, kim khí <b>lập hóa đơn bán lẻ nhanh tại quầy</b>: gõ vài chữ là ra tên hàng kèm đơn vị tính và giá bán; tiền được cộng tự động và đọc thành chữ; bấm một nút là in được hóa đơn khổ A4 có chỗ ký tên.</p>
+<p>Phần mềm chạy ngay trên trình duyệt web của máy tính, <b>không cần cài đặt, không cần Microsoft Office, không cần Internet</b>. Toàn bộ dữ liệu được lưu ngay trên máy của cửa hàng.</p>
+
+<table>
+  <tr><th style="width:32%">Yêu cầu</th><th>Chi tiết</th></tr>
+  <tr><td>Hệ điều hành</td><td>Windows 10 hoặc Windows 11 (64-bit)</td></tr>
+  <tr><td>Trình duyệt</td><td>Microsoft Edge (có sẵn trong Windows), Google Chrome hoặc Cốc Cốc</td></tr>
+  <tr><td>Máy in</td><td>Bất kỳ máy in nào in được khổ A4 (không bắt buộc, có thể lưu hóa đơn ra PDF)</td></tr>
+  <tr><td>Dung lượng</td><td>Khoảng 10 MB, dữ liệu tăng rất chậm (hàng nghìn hóa đơn chỉ vài MB)</td></tr>
+</table>
+
+<h3>Bộ phần mềm gồm những gì</h3>
+<p>Sau khi giải nén file <code>.zip</code>, bạn có thư mục <code>QuanLyBanHangVatTu</code> gồm:</p>
+<table>
+  <tr><th style="width:32%">Tên</th><th>Công dụng</th></tr>
+  <tr><td><b>BTKTPMUD.exe</b></td><td>File chạy phần mềm. Bấm đúp để mở.</td></tr>
+  <tr><td><b>data</b> (thư mục)</td><td>Nơi lưu toàn bộ dữ liệu: danh mục hàng hóa, lịch sử hóa đơn, thông tin cửa hàng. <b>Không xóa thư mục này.</b></td></tr>
+  <tr><td>HUONG_DAN_SU_DUNG.pdf</td><td>Tài liệu bạn đang đọc.</td></tr>
+  <tr><td>BAT_DAU_NHANH.txt</td><td>Hướng dẫn rút gọn 1 trang.</td></tr>
+</table>
+<div class="callout note"><b>Dữ liệu mẫu có sẵn</b>Thư mục <code>data</code> đã có sẵn <b>42 mặt hàng</b> vật tư thông dụng và <b>4 hóa đơn mẫu</b> để bạn dùng thử. Khi bắt đầu bán hàng thật, xem cách xóa dữ liệu mẫu ở <a href="#du-lieu">mục 12</a>.</div>
+
+<div class="cheat">
+  <h3>Bán hàng nhanh trong 1 phút</h3>
+  <ol class="steps">
+    <li>Bấm đúp <b>BTKTPMUD.exe</b>. Trình duyệt tự mở trang bán hàng.</li>
+    <li>Gõ tên khách (bỏ trống nếu là khách lẻ).</li>
+    <li>Ở cột <b>Tên hàng hóa</b>, gõ vài chữ, ví dụ <code>xi mang</code>, rồi bấm <kbd>Enter</kbd> để chọn. ĐVT và đơn giá tự điền.</li>
+    <li>Gõ <b>số lượng</b>, rồi bấm <kbd>F2</kbd> để thêm dòng hàng tiếp theo.</li>
+    <li>Bấm <span class="btn btn-green">LƯU HÓA ĐƠN</span> (hoặc <kbd>Ctrl</kbd>+<kbd>S</kbd>), rồi bấm <span class="btn btn-blue">In hóa đơn</span>.</li>
+  </ol>
+</div>
+
+<!-- ============================== 2 ============================== -->
+<h2 id="cai-dat"><span class="no">2</span>Cài đặt và mở phần mềm</h2>
+
+<h3>2.1. Giải nén và chạy lần đầu</h3>
+<ol class="steps">
+  <li>Chép file <code>BTKTPMUD-v1.0.0-windows.zip</code> vào máy, ví dụ vào ổ <code>D:\</code>.</li>
+  <li>Bấm chuột phải vào file zip, chọn <b>Giải nén tất cả…</b> (Extract All…), rồi bấm <b>Giải nén</b>. Bạn được thư mục <code>QuanLyBanHangVatTu</code>.</li>
+  <li>Mở thư mục đó và <b>bấm đúp vào BTKTPMUD.exe</b>.</li>
+  <li>Một cửa sổ màu đen hiện lên, sau khoảng 1 giây trình duyệt tự mở trang <code>http://localhost:8080</code> với màn hình <b>Lập Hóa Đơn</b>.</li>
+</ol>
+<div class="callout danger"><b>Phải giải nén trước khi chạy</b>Nếu bấm đúp file exe ngay bên trong file zip (chưa giải nén), Windows chạy nó trong thư mục tạm: dữ liệu bạn nhập sẽ <b>bị mất</b> khi đóng. Luôn giải nén ra một thư mục cố định rồi mới chạy.</div>
+<div class="callout tip"><b>Nên đặt ở đâu?</b>Đặt thư mục ở ổ <code>D:\</code> (ví dụ <code>D:\QuanLyBanHangVatTu</code>) thay vì ở Desktop hoặc ổ <code>C:\</code>, để dữ liệu không bị mất khi cài lại Windows.</div>
+
+<h3>2.2. Cảnh báo của Windows lần đầu chạy</h3>
+<p>Phần mềm chưa đăng ký chữ ký số với Microsoft, nên lần đầu chạy Windows có thể hiện các cảnh báo sau. Đây là điều bình thường.</p>
+<table>
+  <tr><th style="width:38%">Cảnh báo</th><th>Cách xử lý</th></tr>
+  <tr><td><b>"Windows đã bảo vệ PC của bạn"</b><br><span class="muted small">(Windows protected your PC, màn hình xanh dương)</span></td><td>Bấm dòng chữ <b>Thông tin bổ sung</b> (More info), rồi bấm nút <b>Vẫn chạy</b> (Run anyway). Chỉ cần làm một lần.</td></tr>
+  <tr><td><b>Tường lửa Windows</b> hỏi có cho phép truy cập mạng không<br><span class="muted small">(Windows Defender Firewall)</span></td><td>Tick ô <b>Mạng riêng</b> (Private networks) rồi bấm <b>Cho phép</b> (Allow access). Bước này để các máy khác, điện thoại trong cửa hàng dùng chung được. Nếu chỉ dùng 1 máy, bấm Hủy cũng không sao.</td></tr>
+  <tr><td>Phần mềm diệt virus chặn file</td><td>Thêm thư mục phần mềm vào danh sách <b>ngoại lệ</b> (Exclusions) của phần mềm diệt virus.</td></tr>
+</table>
+
+<h3>2.3. Cửa sổ đen: "máy chủ" của phần mềm</h3>
+<p>Cửa sổ đen là bộ phận lưu và xử lý dữ liệu. Nó hiện địa chỉ để mở phần mềm trên máy này và trên các máy khác trong cửa hàng:</p>
+<div class="console">==============================================================
+  HỆ THỐNG QUẢN LÝ BÁN HÀNG &amp; HÓA ĐƠN CỬA HÀNG VẬT TƯ  v1.0.0
+==============================================================
+2026/11/17 08:00:05 Thư mục dữ liệu: D:\QuanLyBanHangVatTu\data
+2026/11/17 08:00:05 Đã sao lưu dữ liệu đầu ngày vào: D:\QuanLyBanHangVatTu\data\backups\20261117
+
+  <span class="hl">► Mở trên máy này:       http://localhost:8080</span>
+  <span class="hl">► Máy khác trong mạng LAN: http://192.168.1.5:8080</span>
+
+  Giữ cửa sổ này mở trong khi bán hàng. Nhấn Ctrl+C để tắt phần mềm.
+--------------------------------------------------------------</div>
+<div class="callout warn"><b>Giữ cửa sổ đen mở trong suốt giờ bán hàng</b>Có thể thu nhỏ nó xuống thanh tác vụ, nhưng <b>không đóng</b>. Đóng cửa sổ đen nghĩa là tắt phần mềm.</div>
+<ul>
+  <li><b>Lỡ đóng trình duyệt:</b> mở lại trình duyệt và gõ <code>localhost:8080</code>, hoặc bấm đúp <b>BTKTPMUD.exe</b> thêm lần nữa (phần mềm chỉ mở lại trang, không chạy trùng).</li>
+  <li><b>Lưu trang vào thanh dấu trang</b> (bấm <kbd>Ctrl</kbd>+<kbd>D</kbd> trên trình duyệt) để lần sau mở nhanh.</li>
+</ul>
+
+<h3>2.4. Tạo lối tắt ngoài màn hình nền và tự chạy khi bật máy</h3>
+<h4>Lối tắt ngoài màn hình nền (Desktop)</h4>
+<ol class="steps">
+  <li>Bấm chuột phải vào <b>BTKTPMUD.exe</b>. Trên Windows 11, chọn thêm <b>Hiển thị thêm tùy chọn</b> (Show more options).</li>
+  <li>Chọn <b>Gửi tới</b>, rồi <b>Màn hình nền (tạo lối tắt)</b> (Send to → Desktop (create shortcut)).</li>
+  <li>Có thể đổi tên lối tắt thành "Bán hàng" cho dễ nhận biết.</li>
+</ol>
+<h4>Tự chạy phần mềm mỗi khi bật máy</h4>
+<ol class="steps">
+  <li>Bấm tổ hợp phím <kbd>Windows</kbd>+<kbd>R</kbd>, gõ <code>shell:startup</code> rồi bấm <kbd>Enter</kbd>. Một thư mục mở ra.</li>
+  <li>Chép lối tắt "Bán hàng" vừa tạo vào thư mục đó. Từ lần bật máy sau, phần mềm tự chạy và tự mở trình duyệt.</li>
+</ol>
+
+<h3>2.5. Tắt phần mềm</h3>
+<p>Cuối ngày, bấm vào cửa sổ đen rồi bấm <kbd>Ctrl</kbd>+<kbd>C</kbd>, hoặc bấm nút <b>X</b> đóng cửa sổ. Dữ liệu được lưu ngay sau mỗi thao tác nên tắt lúc nào cũng an toàn. Tắt máy tính bình thường cũng không mất dữ liệu.</p>
+
+<!-- ============================== 3 ============================== -->
+<h2 id="giao-dien"><span class="no">3</span>Làm quen giao diện</h2>
+<p>Màn hình chính là <b>Lập Hóa Đơn</b>. Các vùng chính được đánh số trong hình:</p>
+<figure><img src="images/01-giao-dien-chinh.png" alt=""><figcaption>Hình 3.1. Màn hình Lập Hóa Đơn</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>4 tab chức năng:</b> Lập Hóa Đơn · Thư Viện Hàng Hóa · Lịch Sử Hóa Đơn · Thống Kê Nhanh. Bấm để chuyển, hoặc dùng <kbd>Alt</kbd>+<kbd>1</kbd> đến <kbd>Alt</kbd>+<kbd>4</kbd>.</div></li>
+  <li><span class="n">2</span><div><b>Trạng thái kết nối:</b> chấm xanh "Đã kết nối máy chủ" là bình thường. Hiện chữ vàng "Ngoại tuyến" là mất kết nối (xem <a href="#ngoai-tuyen">mục 11</a>).</div></li>
+  <li><span class="n">3</span><div><b>Nút bánh răng:</b> nhập tên, địa chỉ, số điện thoại cửa hàng in trên hóa đơn.</div></li>
+  <li><span class="n">4</span><div><b>Thông tin khách hàng:</b> tên khách, ngày lập đơn, ghi chú.</div></li>
+  <li><span class="n">5</span><div><b>Bảng hàng hóa:</b> mỗi dòng là một mặt hàng hoặc dịch vụ. Thành tiền tự tính.</div></li>
+  <li><span class="n">6</span><div><b>Thanh công cụ:</b> Thêm dòng hàng, Hoàn tác (con số cho biết còn bao nhiêu bước hoàn tác được), Làm mới.</div></li>
+  <li><span class="n">7</span><div><b>Tổng tiền thanh toán</b> (chữ số lớn) và <b>số tiền bằng chữ</b>, cập nhật ngay khi bạn gõ.</div></li>
+  <li><span class="n">8</span><div><b>LƯU HÓA ĐƠN</b> (xanh lá): lưu vào hệ thống.</div></li>
+  <li><span class="n">9</span><div><b>IN HÓA ĐƠN</b> (xanh dương): in hóa đơn khổ A4.</div></li>
+</ul>
+<p>Cột bên phải dưới cùng là <b>bảng phím tắt</b>, luôn hiện sẵn để thu ngân tra cứu.</p>
+
+<!-- ============================== 4 ============================== -->
+<h2 id="thong-tin-cua-hang"><span class="no">4</span>Nhập thông tin cửa hàng in trên hóa đơn</h2>
+<p>Làm <b>một lần</b> trước khi bán hàng, để đầu mỗi hóa đơn in ra có tên và địa chỉ cửa hàng của bạn.</p>
+<ol class="steps">
+  <li>Bấm <b>nút bánh răng</b> ở góc trên bên phải màn hình.</li>
+  <li>Điền <b>Tên cửa hàng</b>, <b>Địa chỉ</b>, <b>Điện thoại</b>. Có thể đổi <b>Tiêu đề hóa đơn</b> (mặc định "HÓA ĐƠN BÁN LẺ") và <b>Lời cảm ơn</b> cuối hóa đơn.</li>
+  <li>Bấm <span class="btn btn-blue">Lưu thông tin</span>. Tên cửa hàng hiện ngay ở góc trên bên trái.</li>
+</ol>
+<figure class="small"><img src="images/06-cai-dat-cua-hang.png" alt=""><figcaption>Hình 4.1. Hộp thoại thông tin cửa hàng</figcaption></figure>
+<div class="callout tip"><b>Mẹo</b>Ô địa chỉ và điện thoại được in nguyên văn, nên bạn có thể ghi kèm chữ "Địa chỉ:", "ĐT:" hoặc số tài khoản ngân hàng nếu muốn.</div>
+
+<!-- ============================== 5 ============================== -->
+<h2 id="lap-hoa-don"><span class="no">5</span>Lập hóa đơn bán hàng</h2>
+
+<h3>5.1. Thông tin khách hàng</h3>
+<ul>
+  <li><b>Tên khách hàng:</b> gõ tên khách, có thể ghi kèm công trình trong ngoặc, ví dụ <i>Anh Tuấn (Công trình nhà ông Bảy)</i>. <b>Để trống</b> thì hóa đơn ghi là <b>Khách lẻ</b>.</li>
+  <li><b>Ngày lập đơn:</b> tự điền ngày hôm nay. Bấm vào để chọn ngày khác nếu cần.</li>
+  <li><b>Ghi chú:</b> không bắt buộc, ví dụ địa chỉ giao hàng, hẹn giờ lấy hàng. Ghi chú được in lên hóa đơn.</li>
+</ul>
+<p>Bấm <kbd>Enter</kbd> ở mỗi ô để nhảy sang ô tiếp theo; từ ô Ghi chú, <kbd>Enter</kbd> đưa con trỏ xuống dòng hàng đầu tiên.</p>
+
+<h3>5.2. Thêm hàng bằng gợi ý tự động</h3>
+<ol class="steps">
+  <li>Bấm vào ô <b>Tên hàng hóa, vật tư</b> và gõ một vài chữ của tên hàng. <b>Gõ không dấu cũng được</b>: <code>ong nhua</code> tìm ra "Ống nhựa…"; gõ nhiều từ để lọc chính xác hơn, ví dụ <code>ong 21</code> ra "Ống nhựa Tiền Phong D21".</li>
+  <li>Danh sách gợi ý hiện ra, kèm đơn vị tính và giá bán. Dùng phím <kbd>↓</kbd> <kbd>↑</kbd> để chọn, rồi bấm <kbd>Enter</kbd> (hoặc bấm chuột vào mặt hàng).</li>
+  <li>Phần mềm <b>tự điền ĐVT và Đơn giá</b>, rồi đưa con trỏ sang ô <b>Số lượng</b>. Gõ số lượng.</li>
+  <li>Bấm <kbd>F2</kbd> (hoặc <kbd>Ctrl</kbd>+<kbd>Enter</kbd>, hoặc nút <span class="btn btn-gray">+ Thêm dòng hàng</span>) để thêm mặt hàng tiếp theo.</li>
+</ol>
+<figure><img src="images/02-goi-y-hang.png" alt=""><figcaption>Hình 5.1. Gõ "ong nhua" (không dấu), phần mềm gợi ý các loại ống nhựa kèm ĐVT và giá</figcaption></figure>
+<div class="callout tip"><b>Nhập bằng bàn phím, không cần chuột</b>Phím <kbd>Enter</kbd> đi lần lượt qua các ô: <b>Tên hàng → ĐVT → Số lượng → Đơn giá → dòng tiếp theo</b>. Ở ô Đơn giá của dòng cuối, <kbd>Enter</kbd> tự thêm dòng mới. Có thể sửa lại ĐVT hoặc đơn giá đã tự điền cho riêng hóa đơn này mà không ảnh hưởng thư viện.</div>
+<p>Thành tiền của từng dòng, tổng tiền và số tiền bằng chữ được <b>tính ngay khi gõ</b>, không cần bấm nút tính tiền. Số lượng có thể là số lẻ, ví dụ <code>2.5</code> mét.</p>
+
+<h3>5.3. Hàng mới chưa có trong thư viện</h3>
+<p>Nếu khách mua mặt hàng chưa có trong thư viện, cứ <b>gõ đầy đủ tên hàng</b>, bấm <kbd>Esc</kbd> để đóng gợi ý (nếu có), rồi tự nhập ĐVT và đơn giá. Dòng đó có nhãn <b style="color:#1d4ed8">Mới</b> (số 1 ở hình dưới).</p>
+<p>Khi lưu hóa đơn, mặt hàng mới được <b>tự động thêm vào Thư viện hàng hóa</b> với giá bán bằng đơn giá vừa nhập. Lần sau chỉ cần gõ vài chữ là có gợi ý. Nhớ vào Thư viện bổ sung <b>giá vốn</b> cho mặt hàng đó (xem <a href="#thu-vien">mục 7</a>).</p>
+
+<h3>5.4. Bán khoán trọn gói</h3>
+<p>Với các khoản <b>không tính theo số lượng</b> như tiền công lắp đặt, khoán trọn gói vật tư phụ, vận chuyển…:</p>
+<ol class="steps">
+  <li>Gõ tên khoản, ví dụ <i>Công lắp đặt bồn nước inox</i>, ĐVT ghi <code>gói</code>.</li>
+  <li><b>Để trống ô Số lượng</b> (số 2): ô hiện chữ mờ "Khoán".</li>
+  <li>Nhập <b>Đơn giá</b> là tổng số tiền khoán. <b>Thành tiền = Đơn giá</b>, dòng có nhãn <b style="color:#92400e">Khoán</b> (số 3). Phần mềm không báo lỗi.</li>
+</ol>
+<figure><img src="images/03-hang-moi-ban-khoan.png" alt=""><figcaption>Hình 5.2. Dòng 4 là hàng mới (1), để trống số lượng (2) nên được tính bán khoán (3)</figcaption></figure>
+<p>Trên hóa đơn in ra, cột Số lượng của dòng bán khoán ghi chữ <i>Khoán</i>.</p>
+
+<h3>5.5. Gõ giá nhanh</h3>
+<table>
+  <tr><th style="width:30%">Bạn gõ</th><th>Phần mềm hiểu là</th></tr>
+  <tr><td><code>20000</code> hoặc <code>20.000</code></td><td>20.000 đ</td></tr>
+  <tr><td><code>20k</code></td><td>20.000 đ (k = nghìn)</td></tr>
+  <tr><td><code>500k</code></td><td>500.000 đ</td></tr>
+  <tr><td><code>1,5tr</code> hoặc <code>1.5m</code></td><td>1.500.000 đ (tr hoặc m = triệu)</td></tr>
+</table>
+<p>Khi rời khỏi ô, đơn giá tự hiển thị có dấu chấm phân cách hàng nghìn (ví dụ <b>500.000</b>). Ô đơn giá nhập sai (có chữ) sẽ <b style="color:#dc2626">tô đỏ</b>.</p>
+
+<h3>5.6. Sửa, xóa dòng và Hoàn tác</h3>
+<ul>
+  <li><b>Sửa:</b> bấm vào ô cần sửa và gõ lại. Tiền tự tính lại.</li>
+  <li><b>Xóa một dòng:</b> bấm <b style="color:#dc2626">biểu tượng thùng rác đỏ</b> ở cuối dòng, hoặc đặt con trỏ trong dòng rồi bấm <kbd>Ctrl</kbd>+<kbd>Delete</kbd>.</li>
+  <li><b>Hoàn tác:</b> lỡ xóa nhầm dòng hoặc sửa nhầm giá, bấm <kbd>Ctrl</kbd>+<kbd>Z</kbd> hoặc nút <span class="btn btn-gray">Hoàn tác</span> để quay lại. Hoàn tác được <b>tối đa 50 bước</b> liên tiếp.</li>
+  <li><b>Làm mới:</b> nút <span class="btn btn-red">Làm mới</span> xóa toàn bộ bảng để lập đơn khác (có hỏi xác nhận, và vẫn hoàn tác được).</li>
+</ul>
+<div class="callout note"><b>Tự động sao lưu bản nháp</b>Hóa đơn đang lập dở được tự lưu trên máy (dòng "Đã tự sao lưu lúc …" ở góc khung Thông tin khách hàng). Lỡ tải lại trang hay tắt trình duyệt, mở lại sẽ thấy thông báo <i>"Đã khôi phục hóa đơn đang lập dở"</i> và dữ liệu vẫn còn nguyên.</div>
+
+<h3>5.7. Lưu hóa đơn</h3>
+<ol class="steps">
+  <li>Kiểm tra lại các dòng hàng và tổng tiền.</li>
+  <li>Bấm <span class="btn btn-green">LƯU HÓA ĐƠN</span> hoặc <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
+  <li>Hộp thoại xác nhận hiện <b>mã hóa đơn</b>, tổng tiền và số tiền bằng chữ. Bấm <span class="btn btn-blue">In hóa đơn</span> để in luôn, hoặc <span class="btn btn-gray">Lập hóa đơn mới</span> để phục vụ khách tiếp theo.</li>
+</ol>
+<figure class="small"><img src="images/04-luu-thanh-cong.png" alt=""><figcaption>Hình 5.3. Lưu hóa đơn thành công</figcaption></figure>
+<p><b>Mã hóa đơn</b> được tạo tự động theo dạng <code>HD_TênKhách_NămThángNgày_GiờPhút</code>, ví dụ <code>HD_AnhTuan_20261117_0930</code>, để dễ tìm lại.</p>
+<div class="callout warn"><b>Khi lưu bị báo lỗi</b>Dòng có lỗi được <b style="color:#dc2626">tô đỏ</b> và con trỏ nhảy tới ô cần sửa. Các lỗi thường gặp: dòng có giá nhưng <b>chưa có tên hàng</b>, có tên hàng nhưng <b>chưa nhập đơn giá</b>, hoặc số lượng âm. Dòng hoàn toàn trống được bỏ qua, không cần xóa.</div>
+
+<h3>5.8. Lập hóa đơn mới</h3>
+<p>Sau khi lưu, bấm <span class="btn btn-gray">Lập hóa đơn mới</span> trong hộp thoại, hoặc nút <span class="btn btn-red">Làm mới</span>. Nếu bấm Lưu lần nữa cho đúng hóa đơn đã lưu, phần mềm sẽ hỏi lại để tránh lưu trùng hai lần.</p>
+
+<!-- ============================== 6 ============================== -->
+<h2 id="in-hoa-don"><span class="no">6</span>In hóa đơn khổ A4</h2>
+<p>Có 3 cách in:</p>
+<ul>
+  <li>Bấm <span class="btn btn-blue">IN HÓA ĐƠN</span> hoặc <kbd>Ctrl</kbd>+<kbd>P</kbd> trên màn hình Lập hóa đơn: in hóa đơn đang hiển thị.</li>
+  <li>Bấm <span class="btn btn-blue">In hóa đơn</span> trong hộp thoại ngay sau khi lưu.</li>
+  <li>Vào <b>Lịch Sử Hóa Đơn</b>, bấm nút <span class="btn btn-gray">In</span> ở hóa đơn cần in lại.</li>
+</ul>
+<p>Trình duyệt mở <b>hộp thoại in</b>. Thiết lập một lần như sau, các lần sau trình duyệt tự nhớ:</p>
+<table>
+  <tr><th style="width:36%">Mục trong hộp thoại in</th><th>Chọn</th></tr>
+  <tr><td>Máy in (Destination / Đích)</td><td>Tên máy in của cửa hàng. Chọn <b>Lưu dưới dạng PDF</b> (Save as PDF) nếu muốn gửi hóa đơn qua Zalo hoặc email.</td></tr>
+  <tr><td>Bố cục (Layout)</td><td><b>Dọc</b> (Portrait)</td></tr>
+  <tr><td>Khổ giấy (Paper size), trong "Cài đặt khác"</td><td><b>A4</b></td></tr>
+  <tr><td>Lề (Margins)</td><td><b>Mặc định</b> (Default)</td></tr>
+  <tr><td>Tỷ lệ (Scale)</td><td><b>Mặc định / 100</b></td></tr>
+  <tr><td>Đầu trang và chân trang (Headers and footers)</td><td><b>Bỏ tick</b>: để giấy không bị in kèm địa chỉ web và ngày giờ ở mép trang</td></tr>
+</table>
+<p>Bấm <b>In</b>. Hóa đơn in ra chỉ gồm phiếu bán hàng: menu và nút bấm của phần mềm được tự động ẩn.</p>
+<figure class="narrow"><img src="images/05-phieu-in-a4.png" alt=""><figcaption>Hình 6.1. Mẫu hóa đơn in khổ A4: thông tin cửa hàng, số hóa đơn, ngày tháng, bảng hàng, tổng tiền bằng số và bằng chữ, chỗ ký của khách hàng và người bán</figcaption></figure>
+<div class="callout tip"><b>In hóa đơn chưa lưu</b>Có thể in khi chưa lưu, ví dụ để làm <b>báo giá</b> cho khách. Khi đó ô "Số" trên hóa đơn ghi <i>(chưa lưu)</i>.</div>
+
+<!-- ============================== 7 ============================== -->
+<h2 id="thu-vien"><span class="no">7</span>Thư viện hàng hóa</h2>
+<p>Thư viện là danh mục hàng hóa dùng chung cho mọi máy trong cửa hàng; đây là nguồn của chức năng gợi ý khi lập hóa đơn.</p>
+<figure><img src="images/07-thu-vien.png" alt=""><figcaption>Hình 7.1. Tab Thư Viện Hàng Hóa</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>Form thêm / sửa vật tư:</b> Tên vật tư, Đơn vị tính (có gợi ý: cây, cuộn, mét, cái, bao, tấm, kg…), Giá vốn nhập hàng, Giá bán ra.</div></li>
+  <li><span class="n">2</span><div><b>Lãi dự kiến</b> hiện ngay khi nhập giá: <b>Lãi gộp</b> = Giá bán − Giá vốn; <b>Tỷ lệ lãi trên giá vốn</b> và <b>trên giá bán</b>. Bán lỗ thì số hiện màu đỏ.</div></li>
+  <li><span class="n">3</span><div>Nút <b>Thêm vào danh mục</b> (đổi thành <b>Lưu thay đổi</b> khi đang sửa, kèm nút <b>Hủy sửa</b>).</div></li>
+  <li><span class="n">4</span><div><b>Ô tìm kiếm:</b> lọc ngay khi gõ, theo tên, mã hàng hoặc ĐVT, gõ không dấu được.</div></li>
+  <li><span class="n">5</span><div><b>Tiêu đề cột:</b> bấm vào tên cột (Mã hàng, Tên vật tư, Giá nhập, Giá bán, Lợi nhuận…) để sắp xếp tăng / giảm dần.</div></li>
+  <li><span class="n">6</span><div>Nút <b>Sửa</b>: đưa mặt hàng lên form để sửa. Nút <b>Xóa</b>: xóa khỏi thư viện (có hỏi xác nhận).</div></li>
+</ul>
+<h3>Thêm, sửa, xóa mặt hàng</h3>
+<ul>
+  <li><b>Thêm:</b> nhập Tên vật tư, Đơn vị tính, Giá vốn, Giá bán (gõ nhanh <code>45k</code> cũng được) rồi bấm <span class="btn btn-green">Thêm vào danh mục</span>. Mặt hàng hiện ở đầu bảng với nhãn <b style="color:#1d4ed8">Mới</b> trong ngày. Hai mặt hàng không được trùng tên.</li>
+  <li><b>Sửa giá, đổi ĐVT:</b> tìm mặt hàng, bấm <span class="btn btn-gray">Sửa</span>, sửa trên form (form chuyển màu xanh nhạt) rồi bấm <b>Lưu thay đổi</b>. Bấm <b>Hủy sửa</b> hoặc <kbd>Esc</kbd> để bỏ.</li>
+  <li><b>Xóa:</b> bấm <span class="btn btn-red">Xóa</span> và xác nhận.</li>
+</ul>
+<div class="callout note"><b>Lưu ý</b>
+<ul style="margin:2px 0 0">
+  <li>Đổi giá hoặc xóa mặt hàng chỉ ảnh hưởng các hóa đơn lập <b>sau đó</b>; hóa đơn đã lưu giữ nguyên giá lúc bán.</li>
+  <li>Mặt hàng tự thêm từ hóa đơn (mục 5.3) và các khoản dịch vụ có giá vốn bằng 0, hiện biểu tượng <b>ⓘ</b> ở cột Giá nhập. Nên bổ sung giá vốn để biết lãi chính xác.</li>
+</ul></div>
+
+<!-- ============================== 8 ============================== -->
+<h2 id="lich-su"><span class="no">8</span>Lịch sử hóa đơn: tra cứu, in lại, sửa, xóa</h2>
+<figure><img src="images/08-lich-su.png" alt=""><figcaption>Hình 8.1. Tab Lịch Sử Hóa Đơn, hóa đơn mới nhất ở trên cùng</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>Ô tìm kiếm:</b> gõ tên khách hàng (không dấu được) hoặc mã hóa đơn.</div></li>
+  <li><span class="n">2</span><div><b>Chọn ngày:</b> chỉ hiện hóa đơn lập trong ngày đó.</div></li>
+  <li><span class="n">3</span><div><b>Hôm nay:</b> lọc nhanh các hóa đơn trong ngày.</div></li>
+  <li><span class="n">4</span><div><b>Tất cả:</b> xóa bộ lọc, hiện lại toàn bộ hóa đơn.</div></li>
+  <li><span class="n">5</span><div><b>Các nút cho từng hóa đơn:</b> Xem · Nạp lại (Sửa) · In · Xóa.</div></li>
+  <li><span class="n">6</span><div><b>Tổng kết:</b> số hóa đơn và tổng tiền của các hóa đơn đang hiển thị, dùng để xem doanh thu một ngày hoặc một khách.</div></li>
+</ul>
+
+<h3>Xem chi tiết hóa đơn</h3>
+<p>Bấm <span class="btn btn-gray">Xem</span> (hoặc bấm đúp vào dòng) để mở phiếu bán hàng đầy đủ, giống bản in. Trong cửa sổ này có thể bấm <b>In hóa đơn</b> hoặc <b>Nạp lại (Sửa)</b>. Bấm <kbd>Esc</kbd> để đóng.</p>
+<figure><img src="images/09-xem-hoa-don.png" alt=""><figcaption>Hình 8.2. Xem chi tiết hóa đơn</figcaption></figure>
+
+<h3>Nạp lại hóa đơn cũ để sửa</h3>
+<p>Dùng khi khách mua thêm, trả bớt hàng, hoặc lập đơn sai cần sửa.</p>
+<ol class="steps">
+  <li>Bấm <span class="btn btn-gray">Nạp lại (Sửa)</span> ở hóa đơn cần sửa. Phần mềm chuyển sang tab Lập Hóa Đơn và nạp đầy đủ thông tin khách và các dòng hàng.</li>
+  <li>Sửa số lượng, thêm hoặc xóa dòng như khi lập hóa đơn mới.</li>
+  <li>Chọn một trong hai cách lưu:
+    <ul>
+      <li><span class="btn btn-green">CẬP NHẬT HÓA ĐƠN</span>: <b>ghi đè</b> hóa đơn cũ, giữ nguyên mã hóa đơn.</li>
+      <li><span class="btn btn-gray">Lưu thành đơn mới</span>: giữ nguyên hóa đơn cũ và tạo <b>hóa đơn mới</b> (ví dụ dùng hóa đơn cũ làm mẫu cho khách quen mua lại).</li>
+    </ul>
+  </li>
+</ol>
+<figure><img src="images/10-sua-hoa-don.png" alt=""><figcaption>Hình 8.3. Đang sửa hóa đơn cũ</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>Thanh thông báo</b> cho biết đang sửa hóa đơn nào. Nút <b>Chuyển thành đơn mới</b> giữ lại dữ liệu nhưng không còn gắn với hóa đơn cũ.</div></li>
+  <li><span class="n">2</span><div><b>Trạng thái:</b> "Đã lưu" hoặc "có thay đổi chưa lưu".</div></li>
+  <li><span class="n">3</span><div><b>Cập nhật hóa đơn:</b> ghi đè hóa đơn cũ.</div></li>
+  <li><span class="n">4</span><div><b>Lưu thành đơn mới.</b></div></li>
+</ul>
+
+<h3>Xóa hóa đơn</h3>
+<p>Bấm <span class="btn btn-red">Xóa</span> và xác nhận. Dùng khi hủy đơn hoặc lập nhầm.</p>
+<div class="callout danger"><b>Xóa hóa đơn không hoàn tác được</b>Chỉ khôi phục được từ bản sao lưu đầu ngày (xem <a href="#du-lieu">mục 12</a>). Nên giao quyền xóa hóa đơn cho chủ cửa hàng.</div>
+
+<!-- ============================== 9 ============================== -->
+<h2 id="thong-ke"><span class="no">9</span>Thống kê nhanh</h2>
+<figure><img src="images/11-thong-ke.png" alt=""><figcaption>Hình 9.1. Tab Thống Kê Nhanh</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>3 thẻ tổng quan:</b> tổng số hóa đơn đã xuất, tổng doanh thu, tổng số mặt hàng trong thư viện; kèm số liệu riêng của <b>hôm nay</b> và giá trị trung bình mỗi đơn.</div></li>
+  <li><span class="n">2</span><div><b>Biểu đồ doanh thu 7 ngày gần nhất</b> (theo ngày lập hóa đơn). Rê chuột lên cột để xem số tiền và số hóa đơn từng ngày.</div></li>
+  <li><span class="n">3</span><div>Nút <b>Xem dạng bảng</b>: chuyển biểu đồ thành bảng số liệu.</div></li>
+  <li><span class="n">4</span><div><b>5 mặt hàng doanh thu cao nhất</b>, kèm số lượng đã bán.</div></li>
+</ul>
+<p>Bấm <span class="btn btn-gray">Làm mới</span> ở góc trên để cập nhật số liệu mới nhất.</p>
+
+<!-- ============================== 10 ============================== -->
+<h2 id="nhieu-may"><span class="no">10</span>Dùng trên nhiều máy và điện thoại</h2>
+<p>Nhiều máy tính, điện thoại, máy tính bảng trong cửa hàng có thể <b>cùng lập hóa đơn</b> trên một kho dữ liệu chung.</p>
+<ol class="steps">
+  <li>Chọn <b>một máy làm máy chủ</b> (thường là máy ở quầy thu ngân). Chỉ chạy <b>BTKTPMUD.exe</b> trên máy này và để máy luôn bật trong giờ bán hàng.</li>
+  <li>Xem địa chỉ ở dòng <b>"Máy khác trong mạng LAN"</b> trên cửa sổ đen, ví dụ <code>http://192.168.1.5:8080</code>.</li>
+  <li>Trên máy khác hoặc điện thoại <b>kết nối cùng mạng Wi-Fi / mạng dây của cửa hàng</b>, mở trình duyệt và gõ đúng địa chỉ đó.</li>
+</ol>
+<figure class="phone"><img src="images/13-dien-thoai.png" alt=""><figcaption>Hình 10.1. Lập hóa đơn trên điện thoại</figcaption></figure>
+<div class="callout warn"><b>Không vào được từ máy khác?</b>
+<ul style="margin:4px 0 0">
+  <li>Kiểm tra hai máy cùng một mạng Wi-Fi.</li>
+  <li>Lần đầu chạy, tường lửa Windows phải được <b>Cho phép</b> (mục 2.2). Nếu lỡ bấm Hủy: mở <i>Windows Security → Tường lửa → Cho phép ứng dụng qua tường lửa</i>, tick <b>BTKTPMUD</b> ở cột Mạng riêng.</li>
+  <li>Địa chỉ IP có thể thay đổi sau khi khởi động lại modem Wi-Fi: xem lại địa chỉ mới trên cửa sổ đen.</li>
+</ul></div>
+<p>Các máy cùng lưu hóa đơn một lúc vẫn an toàn: phần mềm xếp hàng các lượt ghi, không hóa đơn nào bị mất hoặc ghi đè.</p>
+
+<!-- ============================== 11 ============================== -->
+<h2 id="ngoai-tuyen"><span class="no">11</span>Khi mất kết nối máy chủ</h2>
+<p>Nếu cửa sổ đen trên máy chủ bị tắt, máy chủ mất điện, hoặc điện thoại rớt Wi-Fi, phần mềm <b>không bị treo</b> mà tự chuyển sang chế độ ngoại tuyến:</p>
+<figure><img src="images/12-ngoai-tuyen.png" alt=""><figcaption>Hình 11.1. Chế độ ngoại tuyến</figcaption></figure>
+<ul class="legend">
+  <li><span class="n">1</span><div><b>Thanh cảnh báo màu vàng</b> cho biết đang ngoại tuyến và số hóa đơn đang chờ đồng bộ. Nút <b>Thử kết nối lại</b> để kiểm tra ngay.</div></li>
+  <li><span class="n">2</span><div>Nhãn trạng thái chuyển thành <b>Ngoại tuyến</b>.</div></li>
+</ul>
+<p>Trong lúc ngoại tuyến:</p>
+<ul>
+  <li><b>Vẫn lập hóa đơn được</b>, vẫn có gợi ý tên hàng (dùng bản thư viện đã lưu trên máy ở lần kết nối gần nhất).</li>
+  <li>Bấm Lưu: hóa đơn được <b>lưu tạm trên máy</b> với mã bắt đầu bằng <code>OFFLINE_</code>, vẫn <b>in được</b> bình thường.</li>
+  <li>Khi máy chủ hoạt động lại, phần mềm <b>tự đẩy</b> các hóa đơn lưu tạm lên máy chủ và thông báo "Đã đồng bộ…". Hóa đơn được cấp mã chính thức.</li>
+  <li>Chưa sửa được thư viện hàng hóa và chưa xóa được hóa đơn cho đến khi có kết nối.</li>
+</ul>
+<div class="callout danger"><b>Khi còn hóa đơn chờ đồng bộ</b>Không xóa lịch sử duyệt web, không dùng chế độ ẩn danh, và mở lại phần mềm trên <b>đúng máy, đúng trình duyệt đó</b>, vì hóa đơn lưu tạm nằm trong trình duyệt của máy đó.</div>
+
+<!-- ============================== 12 ============================== -->
+<h2 id="du-lieu"><span class="no">12</span>Dữ liệu: sao lưu, khôi phục, chuyển máy</h2>
+<p>Toàn bộ dữ liệu nằm trong thư mục <code>data</code> cạnh file BTKTPMUD.exe:</p>
+<table>
+  <tr><th style="width:36%">File</th><th>Nội dung</th></tr>
+  <tr><td><code>products_data.json</code></td><td>Thư viện hàng hóa</td></tr>
+  <tr><td><code>history_data.json</code></td><td>Lịch sử hóa đơn</td></tr>
+  <tr><td><code>settings.json</code></td><td>Thông tin cửa hàng in trên hóa đơn</td></tr>
+  <tr><td><code>backups\</code> (thư mục)</td><td>Bản sao lưu tự động mỗi ngày</td></tr>
+</table>
+
+<h3>Sao lưu tự động</h3>
+<p>Mỗi ngày, lần đầu mở phần mềm, toàn bộ dữ liệu được sao vào <code>data\backups\NămThángNgày</code> (ví dụ <code>data\backups\20261117</code>). Phần mềm giữ <b>14 ngày gần nhất</b>.</p>
+<div class="callout warn"><b>Nên tự sao lưu ra USB hoặc Google Drive mỗi tuần</b>Bản sao lưu tự động nằm cùng ổ cứng với dữ liệu: nếu máy hỏng ổ cứng hoặc bị mất thì mất cả hai. Hãy chép <b>cả thư mục <code>data</code></b> ra USB hoặc tải lên Google Drive định kỳ.</div>
+
+<h3>Khôi phục từ bản sao lưu</h3>
+<ol class="steps">
+  <li><b>Tắt phần mềm</b> (đóng cửa sổ đen).</li>
+  <li>Mở <code>data\backups\</code>, vào thư mục ngày muốn khôi phục.</li>
+  <li>Chép các file <code>.json</code> trong đó, dán đè vào thư mục <code>data</code>.</li>
+  <li>Mở lại phần mềm.</li>
+</ol>
+<p class="small muted">Lưu ý: các hóa đơn lập sau thời điểm sao lưu sẽ không còn. Chỉ khôi phục khi thật cần thiết.</p>
+
+<h3>Chuyển phần mềm sang máy khác</h3>
+<p>Tắt phần mềm, chép <b>cả thư mục</b> <code>QuanLyBanHangVatTu</code> (gồm BTKTPMUD.exe và thư mục data) sang máy mới, rồi chạy BTKTPMUD.exe trên máy mới.</p>
+
+<h3>Xóa dữ liệu mẫu để bắt đầu bán hàng thật</h3>
+<ol class="steps">
+  <li><b>Tắt phần mềm.</b></li>
+  <li>Vào thư mục <code>data</code>, xóa file <code>history_data.json</code> (4 hóa đơn mẫu).</li>
+  <li>Nếu muốn tự nhập danh mục hàng từ đầu, xóa thêm <code>products_data.json</code>. Nếu muốn giữ 42 mặt hàng mẫu để sửa giá cho phù hợp, giữ lại file này.</li>
+  <li>Mở lại phần mềm. Các file đã xóa được tạo lại ở dạng trống.</li>
+</ol>
+<div class="callout danger"><b>Không sửa file dữ liệu bằng tay</b>Không mở các file <code>.json</code> bằng Notepad hay Word để sửa. Mọi thay đổi nên làm trong phần mềm. File bị sửa sai định dạng sẽ khiến phần mềm báo lỗi khi khởi động.</div>
+
+<!-- ============================== 13 ============================== -->
+<h2 id="phim-tat"><span class="no">13</span>Bảng phím tắt</h2>
+<table>
+  <tr><th style="width:36%">Phím</th><th>Chức năng</th></tr>
+  <tr><td><kbd>F2</kbd> hoặc <kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Thêm dòng hàng mới và đưa con trỏ vào ô Tên hàng</td></tr>
+  <tr><td><kbd>↓</kbd> <kbd>↑</kbd> rồi <kbd>Enter</kbd></td><td>Chọn mặt hàng trong danh sách gợi ý</td></tr>
+  <tr><td><kbd>Esc</kbd></td><td>Đóng danh sách gợi ý / đóng hộp thoại</td></tr>
+  <tr><td><kbd>Enter</kbd></td><td>Sang ô kế tiếp: Tên hàng → ĐVT → Số lượng → Đơn giá → dòng sau</td></tr>
+  <tr><td><kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>Sang ô kế tiếp / quay lại ô trước</td></tr>
+  <tr><td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td><td>Hoàn tác thao tác vừa làm (tối đa 50 bước)</td></tr>
+  <tr><td><kbd>Ctrl</kbd>+<kbd>Delete</kbd></td><td>Xóa dòng hàng đang đặt con trỏ</td></tr>
+  <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Lưu hóa đơn</td></tr>
+  <tr><td><kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>In hóa đơn đang lập</td></tr>
+  <tr><td><kbd>Alt</kbd>+<kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> / <kbd>4</kbd></td><td>Chuyển nhanh sang tab Lập Hóa Đơn / Thư Viện / Lịch Sử / Thống Kê</td></tr>
+</table>
+
+<!-- ============================== 14 ============================== -->
+<h2 id="su-co"><span class="no">14</span>Câu hỏi thường gặp và xử lý sự cố</h2>
+<table>
+  <tr><th style="width:36%">Hiện tượng</th><th>Cách xử lý</th></tr>
+  <tr><td>Trình duyệt báo <b>"Không thể truy cập trang web này"</b> hoặc "localhost từ chối kết nối"</td><td>Phần mềm chưa chạy hoặc cửa sổ đen đã bị đóng. Bấm đúp lại <b>BTKTPMUD.exe</b>.</td></tr>
+  <tr><td>Cửa sổ đen hiện chữ <b>[LỖI] Không mở được cổng 8080</b></td><td>Một phần mềm khác đang dùng cổng 8080. Tạo lối tắt của BTKTPMUD.exe, bấm chuột phải vào lối tắt → <b>Thuộc tính</b> (Properties), ở ô <b>Đích</b> (Target) thêm vào cuối: <code> -port 8081</code>, bấm OK. Chạy bằng lối tắt đó và mở trình duyệt tại <code>localhost:8081</code>.</td></tr>
+  <tr><td>Cửa sổ đen báo <b>[LỖI] Không mở được dữ liệu… sai định dạng JSON</b></td><td>File dữ liệu bị hỏng do sửa tay. Khôi phục file đó từ <code>data\backups</code> (mục 12).</td></tr>
+  <tr><td>Bấm đúp lại BTKTPMUD.exe chỉ thấy trình duyệt mở</td><td>Bình thường: phần mềm đang chạy sẵn nên chỉ mở thêm trang.</td></tr>
+  <tr><td>Gõ tên hàng <b>không thấy gợi ý</b></td><td>Mặt hàng chưa có trong thư viện: cứ gõ đầy đủ tên rồi nhập ĐVT, đơn giá; khi lưu, mặt hàng được tự thêm vào thư viện. Thử gõ ít chữ hơn hoặc không dấu.</td></tr>
+  <tr><td>Hóa đơn in ra có <b>địa chỉ web, ngày giờ ở mép giấy</b></td><td>Trong hộp thoại in, bỏ tick <b>Đầu trang và chân trang</b> (Headers and footers).</td></tr>
+  <tr><td>Hóa đơn in ra <b>bị thu nhỏ hoặc lệch</b></td><td>Chọn Khổ giấy <b>A4</b>, Lề <b>Mặc định</b>, Tỷ lệ <b>Mặc định</b> (100%).</td></tr>
+  <tr><td>Lỡ <b>xóa nhầm dòng</b> hoặc sửa nhầm giá</td><td>Bấm <kbd>Ctrl</kbd>+<kbd>Z</kbd>.</td></tr>
+  <tr><td>Lỡ <b>xóa nhầm hóa đơn</b> đã lưu</td><td>Không hoàn tác được. Có thể khôi phục từ bản sao lưu đầu ngày (mục 12), hoặc lập lại hóa đơn đó.</td></tr>
+  <tr><td>Thông báo <b>"Đã khôi phục hóa đơn đang lập dở"</b></td><td>Bình thường: phần mềm khôi phục hóa đơn bạn đang nhập trước khi tải lại trang. Bấm Làm mới nếu không cần.</td></tr>
+  <tr><td>Thanh màu vàng <b>"Mất kết nối máy chủ"</b></td><td>Kiểm tra cửa sổ đen trên máy chủ còn mở không, máy còn kết nối Wi-Fi không. Hóa đơn lưu trong lúc này sẽ tự đồng bộ khi có kết nối lại (mục 11).</td></tr>
+  <tr><td>Ngày giờ trên hóa đơn <b>bị sai</b></td><td>Kiểm tra đồng hồ của máy tính (góc phải dưới màn hình) đã đúng ngày giờ và múi giờ Việt Nam (UTC+07:00) chưa.</td></tr>
+  <tr><td>Muốn đổi <b>tên cửa hàng</b> trên hóa đơn</td><td>Bấm nút bánh răng (mục 4).</td></tr>
+</table>
+
+<div class="callout tip" style="margin-top:16px"><b>Ghi nhớ 3 điều quan trọng</b>
+<ol style="margin:4px 0 0">
+  <li>Giữ <b>cửa sổ đen</b> mở trong giờ bán hàng.</li>
+  <li><b>Không xóa thư mục data</b>; sao lưu nó ra USB hoặc Google Drive mỗi tuần.</li>
+  <li>Bấm nhầm thì <kbd>Ctrl</kbd>+<kbd>Z</kbd>.</li>
+</ol></div>
+
+</body>
+</html>

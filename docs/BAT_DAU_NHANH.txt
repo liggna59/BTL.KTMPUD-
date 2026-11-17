@@ -1,0 +1,46 @@
+PHẦN MỀM QUẢN LÝ BÁN HÀNG & HÓA ĐƠN CỬA HÀNG VẬT TƯ - BẮT ĐẦU NHANH
+====================================================================
+
+Hướng dẫn đầy đủ, có hình minh họa: mở file HUONG_DAN_SU_DUNG.pdf trong cùng thư mục.
+
+Không cần cài đặt, không cần Internet. Chạy trên Windows 10/11.
+
+
+1. MỞ PHẦN MỀM
+--------------
+- Bấm đúp BTKTPMUD.exe
+- Một cửa sổ màu đen hiện lên, trình duyệt tự mở trang http://localhost:8080
+- GIỮ CỬA SỔ ĐEN MỞ trong suốt giờ bán hàng. Đóng nó = tắt phần mềm.
+- Lỡ đóng trình duyệt: mở trình duyệt, gõ localhost:8080
+
+Lần đầu chạy Windows có thể cảnh báo:
+- "Windows đã bảo vệ PC của bạn": bấm "Thông tin bổ sung" -> "Vẫn chạy".
+- Tường lửa hỏi quyền truy cập mạng: bấm "Cho phép".
+
+
+2. BÁN HÀNG
+-----------
+1) Gõ tên khách (để trống = Khách lẻ).
+2) Ô "Tên hàng hóa": gõ vài chữ (không dấu cũng được), chọn bằng phím mũi tên + Enter.
+   Đơn vị tính và đơn giá tự điền.
+3) Gõ số lượng. Để TRỐNG số lượng = bán khoán (Thành tiền = Đơn giá).
+4) F2: thêm dòng hàng. Ctrl+Z: hoàn tác khi bấm nhầm.
+5) Ctrl+S (hoặc nút LƯU HÓA ĐƠN) -> bấm "In hóa đơn".
+
+Khi in: chọn khổ A4, bỏ tick "Đầu trang và chân trang".
+Nhập tên, địa chỉ cửa hàng in trên hóa đơn: bấm nút bánh răng góc phải trên.
+
+
+3. DỮ LIỆU
+----------
+- Mọi dữ liệu nằm trong thư mục "data". KHÔNG XÓA thư mục này.
+- Phần mềm tự sao lưu mỗi ngày vào data\backups\
+- Nên chép thư mục "data" ra USB hoặc Google Drive mỗi tuần.
+- Thư mục "data" đang có 42 mặt hàng và 4 hóa đơn mẫu. Muốn bắt đầu bán thật:
+  tắt phần mềm, xóa file data\history_data.json rồi mở lại.
+
+
+4. NHIỀU MÁY / ĐIỆN THOẠI
+-------------------------
+Chỉ chạy BTKTPMUD.exe trên 1 máy. Máy khác, điện thoại cùng Wi-Fi mở trình duyệt,
+gõ địa chỉ dòng "Máy khác trong mạng LAN" trên cửa sổ đen (VD: http://192.168.1.5:8080).
