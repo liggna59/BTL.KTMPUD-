@@ -1,0 +1,338 @@
+[
+  {
+    "id": "PROD_001",
+    "name": "Xi măng Hoàng Thạch PCB40",
+    "unit": "bao",
+    "cost_price": 75000,
+    "selling_price": 95000,
+    "created_at": "2026-11-16T08:00:00Z"
+  },
+  {
+    "id": "PROD_002",
+    "name": "Dây điện Trần Phú 2x2.5",
+    "unit": "cuộn",
+    "cost_price": 820000,
+    "selling_price": 980000,
+    "created_at": "2026-11-16T08:01:00Z"
+  },
+  {
+    "id": "PROD_003",
+    "name": "Xi măng Bút Sơn PCB30",
+    "unit": "bao",
+    "cost_price": 70000,
+    "selling_price": 88000,
+    "created_at": "2026-11-16T08:02:00Z"
+  },
+  {
+    "id": "PROD_004",
+    "name": "Cát vàng xây dựng",
+    "unit": "khối",
+    "cost_price": 280000,
+    "selling_price": 350000,
+    "created_at": "2026-11-16T08:03:00Z"
+  },
+  {
+    "id": "PROD_005",
+    "name": "Cát đen san lấp",
+    "unit": "khối",
+    "cost_price": 150000,
+    "selling_price": 200000,
+    "created_at": "2026-11-16T08:04:00Z"
+  },
+  {
+    "id": "PROD_006",
+    "name": "Đá 1x2",
+    "unit": "khối",
+    "cost_price": 320000,
+    "selling_price": 390000,
+    "created_at": "2026-11-16T08:05:00Z"
+  },
+  {
+    "id": "PROD_007",
+    "name": "Gạch đặc Thạch Bàn",
+    "unit": "viên",
+    "cost_price": 1100,
+    "selling_price": 1500,
+    "created_at": "2026-11-16T08:06:00Z"
+  },
+  {
+    "id": "PROD_008",
+    "name": "Thép Hòa Phát D10",
+    "unit": "cây",
+    "cost_price": 85000,
+    "selling_price": 98000,
+    "created_at": "2026-11-16T08:07:00Z"
+  },
+  {
+    "id": "PROD_009",
+    "name": "Thép Hòa Phát D12",
+    "unit": "cây",
+    "cost_price": 125000,
+    "selling_price": 142000,
+    "created_at": "2026-11-16T08:08:00Z"
+  },
+  {
+    "id": "PROD_010",
+    "name": "Dây thép buộc 1 ly",
+    "unit": "kg",
+    "cost_price": 22000,
+    "selling_price": 28000,
+    "created_at": "2026-11-16T08:09:00Z"
+  },
+  {
+    "id": "PROD_011",
+    "name": "Ống nhựa Tiền Phong D21",
+    "unit": "cây",
+    "cost_price": 28000,
+    "selling_price": 36000,
+    "created_at": "2026-11-16T08:10:00Z"
+  },
+  {
+    "id": "PROD_012",
+    "name": "Ống nhựa Tiền Phong D27",
+    "unit": "cây",
+    "cost_price": 36000,
+    "selling_price": 45000,
+    "created_at": "2026-11-16T08:11:00Z"
+  },
+  {
+    "id": "PROD_013",
+    "name": "Ống nhựa Tiền Phong D34",
+    "unit": "cây",
+    "cost_price": 48000,
+    "selling_price": 60000,
+    "created_at": "2026-11-16T08:12:00Z"
+  },
+  {
+    "id": "PROD_014",
+    "name": "Ống nhựa Tiền Phong D60",
+    "unit": "cây",
+    "cost_price": 95000,
+    "selling_price": 118000,
+    "created_at": "2026-11-16T08:13:00Z"
+  },
+  {
+    "id": "PROD_015",
+    "name": "Ống nhựa Tiền Phong D90",
+    "unit": "cây",
+    "cost_price": 165000,
+    "selling_price": 205000,
+    "created_at": "2026-11-16T08:14:00Z"
+  },
+  {
+    "id": "PROD_016",
+    "name": "Ống PPR Vesbo D25 chịu nhiệt",
+    "unit": "cây",
+    "cost_price": 62000,
+    "selling_price": 78000,
+    "created_at": "2026-11-16T08:15:00Z"
+  },
+  {
+    "id": "PROD_017",
+    "name": "Ống luồn dây điện D16",
+    "unit": "cây",
+    "cost_price": 9000,
+    "selling_price": 14000,
+    "created_at": "2026-11-16T08:16:00Z"
+  },
+  {
+    "id": "PROD_018",
+    "name": "Cút nhựa D21",
+    "unit": "cái",
+    "cost_price": 1500,
+    "selling_price": 3000,
+    "created_at": "2026-11-16T08:17:00Z"
+  },
+  {
+    "id": "PROD_019",
+    "name": "Tê nhựa D27",
+    "unit": "cái",
+    "cost_price": 2500,
+    "selling_price": 5000,
+    "created_at": "2026-11-16T08:18:00Z"
+  },
+  {
+    "id": "PROD_020",
+    "name": "Van khóa nước D21",
+    "unit": "cái",
+    "cost_price": 38000,
+    "selling_price": 55000,
+    "created_at": "2026-11-16T08:19:00Z"
+  },
+  {
+    "id": "PROD_021",
+    "name": "Keo dán ống Tiền Phong 200g",
+    "unit": "tuýp",
+    "cost_price": 15000,
+    "selling_price": 22000,
+    "created_at": "2026-11-16T08:20:00Z"
+  },
+  {
+    "id": "PROD_022",
+    "name": "Băng tan quấn ren",
+    "unit": "cuộn",
+    "cost_price": 3000,
+    "selling_price": 6000,
+    "created_at": "2026-11-16T08:21:00Z"
+  },
+  {
+    "id": "PROD_023",
+    "name": "Dây điện Cadivi 1x1.5",
+    "unit": "cuộn",
+    "cost_price": 380000,
+    "selling_price": 455000,
+    "created_at": "2026-11-16T08:22:00Z"
+  },
+  {
+    "id": "PROD_024",
+    "name": "Dây điện Trần Phú 1x2.5",
+    "unit": "mét",
+    "cost_price": 6800,
+    "selling_price": 9000,
+    "created_at": "2026-11-16T08:23:00Z"
+  },
+  {
+    "id": "PROD_025",
+    "name": "Aptomat Panasonic 32A",
+    "unit": "cái",
+    "cost_price": 98000,
+    "selling_price": 125000,
+    "created_at": "2026-11-16T08:24:00Z"
+  },
+  {
+    "id": "PROD_026",
+    "name": "Ổ cắm đôi Sino 3 chấu",
+    "unit": "cái",
+    "cost_price": 32000,
+    "selling_price": 45000,
+    "created_at": "2026-11-16T08:25:00Z"
+  },
+  {
+    "id": "PROD_027",
+    "name": "Công tắc đơn Sino",
+    "unit": "cái",
+    "cost_price": 14000,
+    "selling_price": 22000,
+    "created_at": "2026-11-16T08:26:00Z"
+  },
+  {
+    "id": "PROD_028",
+    "name": "Bóng đèn LED Rạng Đông 9W",
+    "unit": "cái",
+    "cost_price": 28000,
+    "selling_price": 39000,
+    "created_at": "2026-11-16T08:27:00Z"
+  },
+  {
+    "id": "PROD_029",
+    "name": "Đèn tuýp LED Rạng Đông 1m2 18W",
+    "unit": "bộ",
+    "cost_price": 85000,
+    "selling_price": 115000,
+    "created_at": "2026-11-16T08:28:00Z"
+  },
+  {
+    "id": "PROD_030",
+    "name": "Băng dính điện Nano",
+    "unit": "cuộn",
+    "cost_price": 4000,
+    "selling_price": 7000,
+    "created_at": "2026-11-16T08:29:00Z"
+  },
+  {
+    "id": "PROD_031",
+    "name": "Sơn Dulux nội thất 5L",
+    "unit": "thùng",
+    "cost_price": 520000,
+    "selling_price": 650000,
+    "created_at": "2026-11-16T08:30:00Z"
+  },
+  {
+    "id": "PROD_032",
+    "name": "Bột bả Jajynic 40kg",
+    "unit": "bao",
+    "cost_price": 180000,
+    "selling_price": 230000,
+    "created_at": "2026-11-16T08:31:00Z"
+  },
+  {
+    "id": "PROD_033",
+    "name": "Tôn lạnh Hoa Sen 0.4mm",
+    "unit": "mét",
+    "cost_price": 85000,
+    "selling_price": 105000,
+    "created_at": "2026-11-16T08:32:00Z"
+  },
+  {
+    "id": "PROD_034",
+    "name": "Đinh 5 phân",
+    "unit": "kg",
+    "cost_price": 20000,
+    "selling_price": 26000,
+    "created_at": "2026-11-16T08:33:00Z"
+  },
+  {
+    "id": "PROD_035",
+    "name": "Vít bắn tôn 5 phân",
+    "unit": "hộp",
+    "cost_price": 45000,
+    "selling_price": 60000,
+    "created_at": "2026-11-16T08:34:00Z"
+  },
+  {
+    "id": "PROD_036",
+    "name": "Lưới thép B40",
+    "unit": "mét",
+    "cost_price": 38000,
+    "selling_price": 48000,
+    "created_at": "2026-11-16T08:35:00Z"
+  },
+  {
+    "id": "PROD_037",
+    "name": "Tấm thạch cao Gyproc 9mm",
+    "unit": "tấm",
+    "cost_price": 72000,
+    "selling_price": 92000,
+    "created_at": "2026-11-16T08:36:00Z"
+  },
+  {
+    "id": "PROD_038",
+    "name": "Nhân công lắp đặt hoàn thiện",
+    "unit": "gói",
+    "cost_price": 0,
+    "selling_price": 500000,
+    "created_at": "2026-11-16T08:37:00Z"
+  },
+  {
+    "id": "PROD_039",
+    "name": "Tiền công lắp đặt đường ống",
+    "unit": "gói",
+    "cost_price": 0,
+    "selling_price": 300000,
+    "created_at": "2026-11-16T08:38:00Z"
+  },
+  {
+    "id": "PROD_040",
+    "name": "Khoán trọn gói vật tư phụ",
+    "unit": "gói",
+    "cost_price": 0,
+    "selling_price": 200000,
+    "created_at": "2026-11-16T08:39:00Z"
+  },
+  {
+    "id": "PROD_041",
+    "name": "Dịch vụ lắp tủ điện tổng",
+    "unit": "gói",
+    "cost_price": 0,
+    "selling_price": 300000,
+    "created_at": "2026-11-16T08:40:00Z"
+  },
+  {
+    "id": "PROD_042",
+    "name": "Tiền công vận chuyển",
+    "unit": "gói",
+    "cost_price": 0,
+    "selling_price": 150000,
+    "created_at": "2026-11-16T08:41:00Z"
+  }
+]

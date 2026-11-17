@@ -1,0 +1,34 @@
+# File chạy sau khi build
+/bin/
+/dist/
+*.exe
+*.exe~
+
+# Bộ cài / thư mục Go tải về để build (không đưa lên git)
+/go*.windows-amd64/
+/go*.linux-amd64/
+/go*.darwin-*/
+*.zip
+*.tar.gz
+
+# Dữ liệu sinh ra khi chạy
+/data/backups/
+/data/*.tmp
+
+# Kiểm thử E2E
+/tests/e2e/node_modules/
+/tests/e2e/out/
+/tests/e2e/.e2e-data/
+
+# Go
+*.test
+*.out
+coverage.*
+
+# Hệ điều hành / IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+~$*.docx

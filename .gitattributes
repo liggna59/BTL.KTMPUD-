@@ -1,0 +1,12 @@
+# Chuẩn hóa xuống dòng LF trong repo, giữ CRLF cho script Windows
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# File nhị phân
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
+*.docx binary
+*.pdf binary

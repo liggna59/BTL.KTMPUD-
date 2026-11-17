@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Kiểm thử backend + thuật toán client
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: gofmt
+        run: test -z "$(gofmt -l . | tee /dev/stderr)"
+      - name: go vet
+        run: go vet . ./cmd/... ./internal/...
+      - name: go test (kèm race detector)
+        run: go test -race ./internal/...
+      - name: Kiểm thử JavaScript (node --test)
+        run: node --test "tests/js/*.test.js"
+      - name: Build đa nền tảng
+        run: sh ./build.sh all
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BTKTPMUD-binaries
+          path: dist/
+
+  e2e:
+    name: Kiểm thử nghiệm thu E2E (TC01–TC15) trên Edge
+    runs-on: windows-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22.x"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Build
+        run: go build -trimpath -o bin/BTKTPMUD.exe ./cmd/server
+      - name: Chạy E2E
+        working-directory: tests/e2e
+        run: |
+          npm install --no-audit --no-fund
+          npm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: tests/e2e/out/
