@@ -41,3 +41,27 @@ Bên cạnh chương trình, `app_data/products_data.json` lưu thư viện và 
 
 Các bài kiểm thử dùng thư mục tạm riêng.
 
+## Chạy bản EXE
+
+Giải nén gói `QuanLyBanHang-Windows.zip` vào thư mục có quyền ghi, rồi mở
+`QuanLyBanHang.exe`. Máy sử dụng bản EXE có thể chạy ngay mà không cần cài Python.
+Dữ liệu được tạo trong `app_data/` cạnh EXE, hóa đơn xuất nằm trong `hoa_don_xuat/`.
+Khi chuyển sang máy khác, chép cả hai thư mục này cùng EXE để mang theo dữ liệu.
+
+Để tự đóng gói từ mã nguồn, cài công cụ build rồi chạy lệnh sau trong PowerShell.
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install PyInstaller
+powershell -ExecutionPolicy Bypass -File .\build.ps1
+```
+
+Kết quả nằm trong `dist/`. Gói phát hành gồm EXE, hướng dẫn và bảng hàng mẫu.
+
+## Thao tác nhanh
+
+- Gõ tên hàng không dấu rồi mở danh sách gợi ý bằng phím mũi tên xuống.
+- Đơn giá hỗ trợ `20k` tương đương 20.000 đồng, `1,5tr` tương đương 1.500.000 đồng.
+- Thành tiền của dòng đang nhập hiển thị ngay dưới ô nhập.
+- **F2** bắt đầu nhập dòng mới, **Ctrl+S** lưu hóa đơn, **Ctrl+Z** hoàn tác.
+- Khi đóng ứng dụng hoặc làm mới hóa đơn có nội dung chưa lưu, ứng dụng hỏi xác nhận.
+

@@ -2,9 +2,12 @@ import re
 import unicodedata
 from datetime import datetime
 from decimal import Decimal, ROUND_HALF_UP
+from functools import lru_cache
 
 
+@lru_cache(maxsize=20000)
 def folded(text):
+    """Nhớ kết quả bỏ dấu để tìm kiếm nhiều lần trên cùng danh mục."""
     text = unicodedata.normalize("NFD", str(text).casefold().replace("đ", "d"))
     return " ".join("".join(c for c in text if not unicodedata.combining(c)).split())
 
@@ -12,11 +15,20 @@ def folded(text):
 def number(value, label, whole=False):
     """Prices use whole VND. Quantities accept a decimal comma or point."""
     text = str(value).strip()
-    if whole and re.fullmatch(r"\d{1,3}([., ])\d{3}(?:\1\d{3})*", text):
+    # JSON có thể đọc số lượng nhỏ thành float dạng 1e-06.
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        text = format(Decimal(str(value)), "f")
+    multiplier = 1
+    if whole:
+        shortcut = re.fullmatch(r"(\d+(?:[.,]\d+)?)\s*(k|tr)", text.casefold())
+        if shortcut:
+            text = shortcut.group(1)
+            multiplier = {"k": 1000, "tr": 1000000}[shortcut.group(2)]
+    if whole and multiplier == 1 and re.fullmatch(r"\d{1,3}([., ])\d{3}(?:\1\d{3})*", text):
         text = re.sub(r"[., ]", "", text)
     if not re.fullmatch(r"\d+(?:[.,]\d+)?", text):
         raise ValueError(f"{label} phải là số không âm.")
-    n = Decimal(text.replace(",", "."))
+    n = Decimal(text.replace(",", ".")) * multiplier
     if n > 999_999_999_999 or (whole and n != int(n)):
         raise ValueError(f"{label} vượt giới hạn hoặc có phần lẻ không hợp lệ.")
     if whole or n == int(n):

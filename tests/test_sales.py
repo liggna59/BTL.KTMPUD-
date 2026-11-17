@@ -88,6 +88,7 @@ class SalesTests(unittest.TestCase):
             with self.assertRaises(PermissionError):
                 self.add(name="Khác")
         self.assertEqual(len(self.sales.lines), 1)
+
         self.assertNotIn("Khác", self.sales.products)
         path = self.sales.export("xlsx", "", self.day)
         old = path.read_bytes()
@@ -97,3 +98,27 @@ class SalesTests(unittest.TestCase):
         self.assertEqual(path.read_bytes(), old)
         self.assertEqual(len(self.sales.lines), 1)
 
+
+    def test_small_quantity_roundtrip(self):
+        self.add(qty="0,000001", price="1000000")
+        code = self.sales.save("Khách thử", self.day)
+        reopened = Sales(self.store)
+        reopened.load(code)
+        self.assertEqual(reopened.lines[0]["quantity"], 0.000001)
+        self.assertEqual(reopened.lines[0]["amount"], 1)
+
+    def test_unchanged_product_does_not_write(self):
+        self.add()
+        with patch.object(self.store, "write", wraps=self.store.write) as write:
+            self.add(qty="2")
+            write.assert_not_called()
+        self.assertEqual(len(self.sales.lines), 2)
+
+    def test_search_after_catalog_changes(self):
+        self.add()
+        self.assertEqual(self.sales.search_products("ong nuoc"), ["Ống nước"])
+        self.sales.put_product("Sơn trắng", "lon", 10, 20, original="Ống nước")
+        self.assertEqual(self.sales.search_products("ong nuoc"), [])
+        self.assertEqual(self.sales.search_products("son"), ["Sơn trắng"])
+        self.sales.delete_product("Sơn trắng")
+        self.assertEqual(self.sales.search_products("son"), [])

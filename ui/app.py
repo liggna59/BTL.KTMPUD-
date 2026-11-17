@@ -38,6 +38,9 @@ class Application:
             self.tabs.add(frame, text=title)
         self.tabs.bind("<<NotebookTabChanged>>", self.changed)
         root.bind_all("<Control-z>", self.undo)
+        root.bind_all("<Control-s>", self.save)
+        root.bind_all("<F2>", self.new_line)
+        root.protocol("WM_DELETE_WINDOW", self.close)
         root.report_callback_exception = self.error
 
     def changed(self, event=None):
@@ -57,6 +60,23 @@ class Application:
         if self.tabs.select() == str(self.invoice):
             self.invoice.undo()
             return "break"
+
+    def save(self, event=None):
+        if self.tabs.select() == str(self.invoice):
+            self.invoice.save()
+            return "break"
+
+    def new_line(self, event=None):
+        self.tabs.select(self.invoice)
+        self.invoice.new_line()
+        return "break"
+
+    def close(self):
+        if self.invoice.has_unsaved_changes() and not messagebox.askyesno(
+                "Đóng ứng dụng", "Có nội dung đang nhập hoặc thay đổi chưa lưu. Bạn muốn đóng ứng dụng?",
+                parent=self.root):
+            return
+        self.root.destroy()
 
     def error(self, kind, value, traceback):
         messagebox.showerror("Không thể hoàn tất thao tác", str(value), parent=self.root)

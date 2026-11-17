@@ -46,6 +46,9 @@ class Sales:
             raise ValueError(f"Dữ liệu đã lưu không hợp lệ ({key}). {exc}") from exc
 
     def commit(self, collection, updated):
+        # Chỉ ghi đĩa khi nội dung thay đổi. Gán sau khi ghi thành công.
+        if updated == getattr(self, collection):
+            return
         self.storage.write(collection, updated)
         setattr(self, collection, updated)
 
@@ -85,6 +88,8 @@ class Sales:
 
     def search_products(self, query):
         needle = folded(query)
+        if not needle:
+            return list(self.products)
         return [name for name in self.products if needle in folded(name)]
 
     def search_history(self, query):

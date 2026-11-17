@@ -38,6 +38,11 @@ class Calculations(unittest.TestCase):
         self.assertEqual(code, sanitize_filename(code))
 
     def test_numbers(self):
+        self.assertEqual(number("20k", "Giá", True), 20000)
+        self.assertEqual(number("1,5tr", "Giá", True), 1500000)
+        self.assertEqual(number("1.5 K", "Giá", True), 1500)
+        with self.assertRaises(ValueError):
+            number("1,0000001k", "Giá", True)
         self.assertEqual(number("12.500", "Giá", True), 12500)
         self.assertEqual(number("0,125", "SL"), 0.125)
         for bad in ("", "NaN", "abc", "-1", "12..500", "1e20"):
