@@ -53,7 +53,10 @@ Yêu cầu: [Go](https://go.dev/dl/) 1.22 trở lên. Không cần thư viện n
 :: Windows
 build.bat          :: chạy kiểm thử rồi build bin\BTKTPMUD.exe
 build.bat run      :: build xong chạy luôn
+build.bat zip      :: build xong đóng gói dist\BTKTPMUD-windows.zip (exe + data + hướng dẫn) để gửi người khác
 ```
+
+Người nhận file `.zip` chỉ cần giải nén và bấm đúp `BTKTPMUD.exe`; hướng dẫn cho người dùng cuối nằm trong [`docs/HUONG_DAN_SU_DUNG.txt`](docs/HUONG_DAN_SU_DUNG.txt) (được đóng kèm trong gói).
 
 ```sh
 # Linux / macOS / Git Bash

@@ -4,6 +4,7 @@ REM  Build phan mem thanh 1 file chay duy nhat: bin\BTKTPMUD.exe
 REM  Yeu cau: Go 1.22 tro len (https://go.dev/dl/)
 REM  Cach dung:  build.bat           -> chay kiem thu roi build
 REM              build.bat run       -> build xong chay luon
+REM              build.bat zip       -> build xong dong goi dist\BTKTPMUD-windows.zip de gui nguoi khac
 REM ==========================================================================
 setlocal
 cd /d "%~dp0"
@@ -38,5 +39,17 @@ echo Sao chep BTKTPMUD.exe cung thu muc data\ sang may ban hang roi bam dup de c
 
 if /i "%1"=="run" (
   bin\BTKTPMUD.exe
+)
+
+if /i "%1"=="zip" (
+  echo == Dong goi dist\BTKTPMUD-windows.zip ==
+  if exist dist\package rmdir /s /q dist\package
+  mkdir dist\package\data
+  copy /y bin\BTKTPMUD.exe dist\package\ >nul
+  copy /y data\*.json dist\package\data\ >nul
+  copy /y docs\HUONG_DAN_SU_DUNG.txt dist\package\ >nul
+  powershell -NoProfile -Command "Compress-Archive -Path 'dist\package\*' -DestinationPath 'dist\BTKTPMUD-windows.zip' -Force"
+  rmdir /s /q dist\package
+  echo Xong! Gui file dist\BTKTPMUD-windows.zip cho nguoi can dung.
 )
 endlocal
